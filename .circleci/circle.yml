@@ -12,3 +12,35 @@ jobs:
       - run: dotnet restore
       - run: dotnet build
       - run: dotnet publish -o publish
+      - persist_to_workspace:
+        root: .
+        paths:
+          - publish
+  deploy-all-other:
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - run: echo export GIT_HASH=$(git rev-parse --short HEAD) >> .circlerc
+      - run: echo 'export BUILD_TAG="$CIRCLE_BUILD_NUM.$GIT_HASH"' >> .circlerc
+      - attach_workspace:
+          at: .
+      - setup_remote_docker
+      - run:
+          name: Create and push docker image
+          command: |
+            source .circlerc
+            docker info
+            docker build --rm=false -t "dnic/$CIRCLE_PROJECT_REPONAME:$BUILD_TAG" .
+            docker login -u $CTX_DOCKER_USER -p $CTX_DOCKER_PASS
+            docker push "dnic/$CIRCLE_PROJECT_REPONAME:$BUILD_TAG"
+workflows:
+    version: 2
+    build-and-deploy:
+      jobs:
+        - build:
+            context: org-global
+        - deploy:
+            context: org-global
+            requires:
+                - build            
