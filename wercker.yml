@@ -41,8 +41,8 @@ build:
 deploy:
   steps:
     - internal/docker-push:
-        username: $USERNAME
-        password: $PASSWORD
+        username: $DOCKER_USERNAME
+        password: $DOCKER_PASSWORD
         repository: dnic/net.core.helloweb
         registry: https://registry.hub.docker.com
         entrypoint: "/pipeline/source/app/docker_entrypoint.sh"
