@@ -43,6 +43,6 @@ deploy:
     - internal/docker-push:
         username: $DOCKER_USERNAME
         password: $DOCKER_PASSWORD
-        repository: dnic/net.core.helloweb
+        repository: dnic/net-core-microservices.sample.helloworld.web
         tag: test-tag
         registry: https://registry.hub.docker.com/v2
