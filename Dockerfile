@@ -7,6 +7,6 @@ WORKDIR /usr/app
 # Bundle app source
 COPY ./publish /usr/app
 
-RUN dotnet net-core-halloworld.dll
+CMD dotnet net-core-halloworld.dll
 
 EXPOSE 5000
