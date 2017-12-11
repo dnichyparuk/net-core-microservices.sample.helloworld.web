@@ -13,9 +13,9 @@ jobs:
       - run: dotnet build
       - run: dotnet publish -o publish
       - persist_to_workspace:
-        root: .
-        paths:
-          - publish
+          root: .
+          paths:
+            - publish
   deploy:
     docker:
       - image: docker:17.05.0-ce-git
