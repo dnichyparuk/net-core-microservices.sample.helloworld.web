@@ -45,4 +45,4 @@ deploy:
         password: $DOCKER_PASSWORD
         repository: dnic/net.core.helloweb
         tag: test-tag
-        registry: https://registry.hub.docker.com
+        registry: https://registry.hub.docker.com/v2
