@@ -8,3 +8,5 @@ WORKDIR /usr/app
 COPY ./publish /usr/app
 
 RUN dotnet net-core-halloworld.dll
+
+EXPOSE 5000
